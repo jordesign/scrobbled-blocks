@@ -121,7 +121,7 @@
 .wp-block-scrobble-blocks-recently-played.is-layout-grid {
 	display: grid;
 	grid-template-columns: repeat(var(--grid-columns, 3), 1fr);
-	gap: var(--scrobble-gap);
+	gap: 50px var(--scrobble-gap);
 }
 
 .wp-block-scrobble-blocks-recently-played.is-layout-grid .scrobble-item {
