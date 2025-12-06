@@ -1,6 +1,6 @@
 === Scrobbled Blocks ===
 Contributors: jordesign
-Donate link: https://jord.design
+Donate link: https://jordangillman.blog
 Tags: lastfm, music, scrobble, blocks, gutenberg
 Requires at least: 6.0
 Tested up to: 6.7
@@ -34,13 +34,6 @@ Show a list or grid of your recent scrobbles. Configurable from 1-20 tracks, wit
 * **Responsive Design** - Looks great on all screen sizes
 * **Custom Placeholder** - Upload your own placeholder image for tracks without artwork
 
-= Use Cases =
-
-* Music bloggers showcasing their current listening
-* Podcasters sharing what inspires them
-* DJs displaying their musical tastes
-* Personal blogs adding personality to their sidebar
-* Portfolio sites adding dynamic content
 
 = Privacy =
 
@@ -109,9 +102,6 @@ Not all tracks on Last.fm have associated album artwork. When artwork is unavail
 
 Scrobbled Blocks requires the Gutenberg block editor. If you're using the Classic Editor plugin, you won't be able to use these blocks directly. Consider using a page builder that supports Gutenberg blocks, or enabling the block editor for specific post types.
 
-= Can I display different users' scrobbles on the same site? =
-
-Version 1.0 supports one Last.fm user per site. Each block will display data from the configured user. Multi-user support is planned for a future release.
 
 = How do I style the blocks to match my theme? =
 
