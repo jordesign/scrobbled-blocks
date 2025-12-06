@@ -126,6 +126,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
+	min-width: 0;
 }
 
 .wp-block-scrobble-blocks-recently-played.is-layout-grid .scrobble-artwork {
@@ -145,7 +146,9 @@
 	display: flex;
 	flex-direction: column;
 	gap: 0.125em;
-	text-align: center;
+	text-align: left;
+	min-width: 0;
+	width: 100%;
 }
 
 /* Shared styles for Recently Played */
@@ -153,9 +156,6 @@
 	font-size: var(--scrobble-font-size-track);
 	font-weight: 600;
 	color: var(--scrobble-color-text);
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
 }
 
 .wp-block-scrobble-blocks-recently-played .scrobble-track a {
@@ -170,9 +170,21 @@
 .wp-block-scrobble-blocks-recently-played .scrobble-artist {
 	font-size: var(--scrobble-font-size-artist);
 	color: var(--scrobble-color-text-secondary);
+}
+
+/* List layout: truncate text with ellipsis */
+.wp-block-scrobble-blocks-recently-played.is-layout-list .scrobble-track,
+.wp-block-scrobble-blocks-recently-played.is-layout-list .scrobble-artist {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+/* Grid layout: wrap text */
+.wp-block-scrobble-blocks-recently-played.is-layout-grid .scrobble-track,
+.wp-block-scrobble-blocks-recently-played.is-layout-grid .scrobble-artist {
+	word-wrap: break-word;
+	overflow-wrap: break-word;
 }
 
 .wp-block-scrobble-blocks-recently-played .scrobble-timestamp {
