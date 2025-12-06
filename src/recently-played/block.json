@@ -1,0 +1,59 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "scrobble-blocks/recently-played",
+	"version": "1.0.0",
+	"title": "Recently Played",
+	"category": "widgets",
+	"icon": "playlist-audio",
+	"description": "Displays a list or grid of recently played tracks from Last.fm.",
+	"keywords": ["lastfm", "music", "recently played", "scrobble", "playlist"],
+	"textdomain": "scrobbled-blocks",
+	"attributes": {
+		"numberOfItems": {
+			"type": "number",
+			"default": 5
+		},
+		"layout": {
+			"type": "string",
+			"default": "list"
+		},
+		"gridColumns": {
+			"type": "number",
+			"default": 3
+		},
+		"showArtwork": {
+			"type": "boolean",
+			"default": true
+		},
+		"showTimestamp": {
+			"type": "boolean",
+			"default": true
+		},
+		"linkToLastFm": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"],
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"color": {
+			"background": true,
+			"text": true,
+			"link": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

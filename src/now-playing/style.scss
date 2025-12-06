@@ -1,0 +1,56 @@
+/**
+ * Frontend styles for Now Playing block
+ */
+
+.wp-block-scrobble-blocks-now-playing {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--scrobble-gap, 1rem);
+
+	.scrobble-artwork {
+		flex-shrink: 0;
+		width: var(--scrobble-artwork-size, 64px);
+		height: var(--scrobble-artwork-size, 64px);
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+			border-radius: 4px;
+		}
+	}
+
+	.scrobble-info {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25em;
+		min-width: 0;
+	}
+
+	.scrobble-track {
+		font-size: var(--scrobble-font-size-track, inherit);
+		font-weight: 600;
+		color: var(--scrobble-color-text, inherit);
+
+		a {
+			color: var(--scrobble-color-link, inherit);
+			text-decoration: none;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+
+	.scrobble-artist {
+		font-size: var(--scrobble-font-size-artist, 0.875em);
+		color: var(--scrobble-color-text-secondary, inherit);
+	}
+
+	.scrobble-timestamp {
+		font-size: var(--scrobble-font-size-timestamp, 0.75em);
+		color: var(--scrobble-color-text-secondary, inherit);
+		opacity: 0.7;
+	}
+}

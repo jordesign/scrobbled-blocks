@@ -1,0 +1,21 @@
+/**
+ * Scrobbled Blocks - Admin Styles
+ *
+ * @package ScrobbledBlocks
+ */
+
+#toggle-api-key {
+	margin-left: 10px;
+}
+
+#placeholder-image-preview img {
+	max-width: 150px;
+	height: auto;
+	border-radius: 4px;
+	border: 1px solid #ddd;
+}
+
+#select-placeholder-image,
+#remove-placeholder-image {
+	margin-right: 5px;
+}

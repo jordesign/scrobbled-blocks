@@ -1,0 +1,47 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "scrobble-blocks/now-playing",
+	"version": "1.0.0",
+	"title": "Now Playing",
+	"category": "widgets",
+	"icon": "controls-volumeon",
+	"description": "Displays the currently playing or most recently played track from Last.fm.",
+	"keywords": ["lastfm", "music", "now playing", "scrobble"],
+	"textdomain": "scrobbled-blocks",
+	"attributes": {
+		"showArtwork": {
+			"type": "boolean",
+			"default": true
+		},
+		"showTimestamp": {
+			"type": "boolean",
+			"default": true
+		},
+		"linkToLastFm": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"],
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"color": {
+			"background": true,
+			"text": true,
+			"link": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

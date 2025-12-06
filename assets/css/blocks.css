@@ -1,0 +1,199 @@
+/**
+ * Scrobbled Blocks - Frontend Styles
+ *
+ * @package ScrobbledBlocks
+ */
+
+:root {
+	--scrobble-artwork-size: 64px;
+	--scrobble-artwork-size-grid: 100%;
+	--scrobble-gap: 1rem;
+	--scrobble-font-size-track: inherit;
+	--scrobble-font-size-artist: 0.875em;
+	--scrobble-font-size-timestamp: 0.75em;
+	--scrobble-color-text: inherit;
+	--scrobble-color-text-secondary: inherit;
+	--scrobble-color-link: inherit;
+}
+
+/* Now Playing Block */
+.wp-block-scrobble-blocks-now-playing {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--scrobble-gap);
+}
+
+.wp-block-scrobble-blocks-now-playing .scrobble-artwork {
+	flex-shrink: 0;
+	width: var(--scrobble-artwork-size);
+	height: var(--scrobble-artwork-size);
+}
+
+.wp-block-scrobble-blocks-now-playing .scrobble-artwork img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	border-radius: 4px;
+}
+
+.wp-block-scrobble-blocks-now-playing .scrobble-info {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25em;
+	min-width: 0;
+}
+
+.wp-block-scrobble-blocks-now-playing .scrobble-track {
+	font-size: var(--scrobble-font-size-track);
+	font-weight: 600;
+	color: var(--scrobble-color-text);
+}
+
+.wp-block-scrobble-blocks-now-playing .scrobble-track a {
+	color: var(--scrobble-color-link);
+	text-decoration: none;
+}
+
+.wp-block-scrobble-blocks-now-playing .scrobble-track a:hover {
+	text-decoration: underline;
+}
+
+.wp-block-scrobble-blocks-now-playing .scrobble-artist {
+	font-size: var(--scrobble-font-size-artist);
+	color: var(--scrobble-color-text-secondary);
+}
+
+.wp-block-scrobble-blocks-now-playing .scrobble-timestamp {
+	font-size: var(--scrobble-font-size-timestamp);
+	color: var(--scrobble-color-text-secondary);
+	opacity: 0.7;
+}
+
+/* Recently Played Block - List Layout */
+.wp-block-scrobble-blocks-recently-played.is-layout-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.wp-block-scrobble-blocks-recently-played.is-layout-list ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.wp-block-scrobble-blocks-recently-played.is-layout-list .scrobble-item {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--scrobble-gap);
+	padding: 0.5rem 0;
+}
+
+.wp-block-scrobble-blocks-recently-played.is-layout-list .scrobble-item:not(:last-child) {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.wp-block-scrobble-blocks-recently-played.is-layout-list .scrobble-artwork {
+	flex-shrink: 0;
+	width: var(--scrobble-artwork-size);
+	height: var(--scrobble-artwork-size);
+}
+
+.wp-block-scrobble-blocks-recently-played.is-layout-list .scrobble-artwork img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	border-radius: 4px;
+}
+
+.wp-block-scrobble-blocks-recently-played.is-layout-list .scrobble-info {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25em;
+	min-width: 0;
+}
+
+/* Recently Played Block - Grid Layout */
+.wp-block-scrobble-blocks-recently-played.is-layout-grid {
+	display: grid;
+	grid-template-columns: repeat(var(--grid-columns, 3), 1fr);
+	gap: var(--scrobble-gap);
+}
+
+.wp-block-scrobble-blocks-recently-played.is-layout-grid .scrobble-item {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.wp-block-scrobble-blocks-recently-played.is-layout-grid .scrobble-artwork {
+	width: var(--scrobble-artwork-size-grid);
+	aspect-ratio: 1;
+}
+
+.wp-block-scrobble-blocks-recently-played.is-layout-grid .scrobble-artwork img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	border-radius: 4px;
+}
+
+.wp-block-scrobble-blocks-recently-played.is-layout-grid .scrobble-info {
+	display: flex;
+	flex-direction: column;
+	gap: 0.125em;
+	text-align: center;
+}
+
+/* Shared styles for Recently Played */
+.wp-block-scrobble-blocks-recently-played .scrobble-track {
+	font-size: var(--scrobble-font-size-track);
+	font-weight: 600;
+	color: var(--scrobble-color-text);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.wp-block-scrobble-blocks-recently-played .scrobble-track a {
+	color: var(--scrobble-color-link);
+	text-decoration: none;
+}
+
+.wp-block-scrobble-blocks-recently-played .scrobble-track a:hover {
+	text-decoration: underline;
+}
+
+.wp-block-scrobble-blocks-recently-played .scrobble-artist {
+	font-size: var(--scrobble-font-size-artist);
+	color: var(--scrobble-color-text-secondary);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.wp-block-scrobble-blocks-recently-played .scrobble-timestamp {
+	font-size: var(--scrobble-font-size-timestamp);
+	color: var(--scrobble-color-text-secondary);
+	opacity: 0.7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 782px) {
+	.wp-block-scrobble-blocks-recently-played.is-layout-grid {
+		grid-template-columns: repeat(min(var(--grid-columns, 3), 2), 1fr);
+	}
+}
+
+@media (max-width: 480px) {
+	.wp-block-scrobble-blocks-recently-played.is-layout-grid {
+		grid-template-columns: repeat(min(var(--grid-columns, 3), 1), 1fr);
+	}
+
+	:root {
+		--scrobble-artwork-size: 48px;
+	}
+}

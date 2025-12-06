@@ -1,0 +1,111 @@
+/**
+ * Editor styles for Recently Played block
+ */
+
+.wp-block-scrobble-blocks-recently-played {
+	// List layout
+	&.is-layout-list {
+		ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		.scrobble-item {
+			display: flex;
+			align-items: flex-start;
+			gap: 1rem;
+			padding: 0.5rem 0;
+
+			&:not(:last-child) {
+				border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+			}
+		}
+
+		.scrobble-artwork {
+			flex-shrink: 0;
+			width: 64px;
+			height: 64px;
+		}
+	}
+
+	// Grid layout
+	&.is-layout-grid {
+		display: grid;
+		grid-template-columns: repeat(var(--grid-columns, 3), 1fr);
+		gap: 1rem;
+
+		.scrobble-item {
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
+		}
+
+		.scrobble-artwork {
+			width: 100%;
+			aspect-ratio: 1;
+		}
+
+		.scrobble-info {
+			text-align: center;
+		}
+	}
+
+	// Shared styles
+	.scrobble-artwork img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		border-radius: 4px;
+	}
+
+	.scrobble-info {
+		display: flex;
+		flex-direction: column;
+		gap: 0.125em;
+		min-width: 0;
+	}
+
+	.scrobble-track {
+		font-weight: 600;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+
+		a {
+			text-decoration: none;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+
+	.scrobble-artist {
+		font-size: 0.875em;
+		opacity: 0.8;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.scrobble-timestamp {
+		font-size: 0.75em;
+		opacity: 0.6;
+	}
+}
+
+// Layout control styling
+.scrobbled-blocks-layout-control {
+	margin-bottom: 1.5em;
+
+	.components-base-control__label {
+		display: block;
+		margin-bottom: 0.5em;
+	}
+
+	.components-button-group {
+		display: flex;
+	}
+}

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <rect width="300" height="300" fill="#1a1a2e"/>
+  <circle cx="150" cy="150" r="100" fill="none" stroke="#4a4a6a" stroke-width="4"/>
+  <circle cx="150" cy="150" r="30" fill="#4a4a6a"/>
+  <circle cx="150" cy="150" r="8" fill="#1a1a2e"/>
+  <g stroke="#4a4a6a" stroke-width="3" stroke-linecap="round">
+    <line x1="180" y1="150" x2="200" y2="150"/>
+    <line x1="200" y1="140" x2="220" y2="130"/>
+    <line x1="200" y1="150" x2="225" y2="150"/>
+    <line x1="200" y1="160" x2="220" y2="170"/>
+  </g>
+  <text x="150" y="260" font-family="system-ui, sans-serif" font-size="14" fill="#6a6a8a" text-anchor="middle">No artwork available</text>
+</svg>
