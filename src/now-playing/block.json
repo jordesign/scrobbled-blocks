@@ -14,6 +14,10 @@
 			"type": "boolean",
 			"default": true
 		},
+		"artworkSize": {
+			"type": "number",
+			"default": 64
+		},
 		"showTimestamp": {
 			"type": "boolean",
 			"default": true

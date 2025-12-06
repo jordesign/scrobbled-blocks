@@ -31,6 +31,7 @@ if ( is_wp_error( $track ) || empty( $track ) ) {
 }
 
 $show_artwork   = $attributes['showArtwork'] ?? true;
+$artwork_size   = $attributes['artworkSize'] ?? 64;
 $show_timestamp = $attributes['showTimestamp'] ?? true;
 $link_to_lastfm = $attributes['linkToLastFm'] ?? true;
 
@@ -81,6 +82,7 @@ if ( ! function_exists( 'scrobbled_blocks_get_relative_time' ) ) {
 
 $wrapper_attributes = get_block_wrapper_attributes( array(
 	'class' => 'wp-block-scrobble-blocks-now-playing',
+	'style' => '--scrobble-artwork-size: ' . absint( $artwork_size ) . 'px;',
 ) );
 
 $track_name   = esc_html( $track['name'] );

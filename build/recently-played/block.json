@@ -3,7 +3,7 @@
   "apiVersion": 3,
   "name": "scrobble-blocks/recently-played",
   "version": "1.0.0",
-  "title": "Recently Played",
+  "title": "Last.fm: Recently Played",
   "category": "widgets",
   "icon": "playlist-audio",
   "description": "Displays a list or grid of recently played tracks from Last.fm.",

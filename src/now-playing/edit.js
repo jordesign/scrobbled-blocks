@@ -3,7 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, ToggleControl, Placeholder, Spinner, Notice } from '@wordpress/components';
+import { PanelBody, ToggleControl, RangeControl, Placeholder, Spinner, Notice } from '@wordpress/components';
 import { useEffect, useState } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 
@@ -66,13 +66,14 @@ function sprintf( format, ...args ) {
  * @return {JSX.Element} Edit component
  */
 export default function Edit( { attributes, setAttributes } ) {
-	const { showArtwork, showTimestamp, linkToLastFm } = attributes;
+	const { showArtwork, artworkSize, showTimestamp, linkToLastFm } = attributes;
 	const [ track, setTrack ] = useState( null );
 	const [ isLoading, setIsLoading ] = useState( true );
 	const [ error, setError ] = useState( null );
 
 	const blockProps = useBlockProps( {
 		className: 'wp-block-scrobble-blocks-now-playing',
+		style: { '--scrobble-artwork-size': `${ artworkSize }px` },
 	} );
 
 	useEffect( () => {
@@ -146,6 +147,16 @@ export default function Edit( { attributes, setAttributes } ) {
 						checked={ showArtwork }
 						onChange={ ( value ) => setAttributes( { showArtwork: value } ) }
 					/>
+					{ showArtwork && (
+						<RangeControl
+							label={ __( 'Artwork size', 'scrobbled-blocks' ) }
+							value={ artworkSize }
+							onChange={ ( value ) => setAttributes( { artworkSize: value } ) }
+							min={ 48 }
+							max={ 200 }
+							step={ 8 }
+						/>
+					) }
 					<ToggleControl
 						label={ __( 'Show timestamp', 'scrobbled-blocks' ) }
 						checked={ showTimestamp }

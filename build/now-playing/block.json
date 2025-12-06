@@ -3,7 +3,7 @@
   "apiVersion": 3,
   "name": "scrobble-blocks/now-playing",
   "version": "1.0.0",
-  "title": "Now Playing",
+  "title": "Last.fm: Now Playing",
   "category": "widgets",
   "icon": "controls-volumeon",
   "description": "Displays the currently playing or most recently played track from Last.fm.",
@@ -18,6 +18,10 @@
     "showArtwork": {
       "type": "boolean",
       "default": true
+    },
+    "artworkSize": {
+      "type": "number",
+      "default": 64
     },
     "showTimestamp": {
       "type": "boolean",
