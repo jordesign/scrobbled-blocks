@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Build artifacts (uncomment if you don't want to commit built files)
+# build/
+
+# Package files
+*.zip
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Optional: Local development
+.env
+.env.local
