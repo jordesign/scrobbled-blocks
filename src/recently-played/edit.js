@@ -7,11 +7,11 @@ import {
 	PanelBody,
 	ToggleControl,
 	RangeControl,
-	ButtonGroup,
-	Button,
 	Placeholder,
 	Spinner,
 	Notice,
+	__experimentalToggleGroupControl as ToggleGroupControl,
+	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from '@wordpress/components';
 import { useEffect, useState } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
@@ -202,25 +202,21 @@ export default function Edit( { attributes, setAttributes } ) {
 						min={ 1 }
 						max={ 20 }
 					/>
-					<div className="scrobbled-blocks-layout-control">
-						<label className="components-base-control__label">
-							{ __( 'Layout', 'scrobbled-blocks' ) }
-						</label>
-						<ButtonGroup>
-							<Button
-								variant={ layout === 'list' ? 'primary' : 'secondary' }
-								onClick={ () => setAttributes( { layout: 'list' } ) }
-							>
-								{ __( 'List', 'scrobbled-blocks' ) }
-							</Button>
-							<Button
-								variant={ layout === 'grid' ? 'primary' : 'secondary' }
-								onClick={ () => setAttributes( { layout: 'grid' } ) }
-							>
-								{ __( 'Grid', 'scrobbled-blocks' ) }
-							</Button>
-						</ButtonGroup>
-					</div>
+					<ToggleGroupControl
+						label={ __( 'Layout', 'scrobbled-blocks' ) }
+						value={ layout }
+						onChange={ ( value ) => setAttributes( { layout: value } ) }
+						isBlock
+					>
+						<ToggleGroupControlOption
+							value="list"
+							label={ __( 'List', 'scrobbled-blocks' ) }
+						/>
+						<ToggleGroupControlOption
+							value="grid"
+							label={ __( 'Grid', 'scrobbled-blocks' ) }
+						/>
+					</ToggleGroupControl>
 					{ layout === 'grid' && (
 						<RangeControl
 							label={ __( 'Grid columns', 'scrobbled-blocks' ) }

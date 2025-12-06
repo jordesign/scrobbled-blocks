@@ -103,6 +103,7 @@ $wrapper_attributes = get_block_wrapper_attributes( array(
  * @param bool   $link_to_lastfm  Whether to link to Last.fm.
  * @return string HTML for the track item.
  */
+if ( ! function_exists( 'scrobbled_blocks_render_track_item' ) ) {
 function scrobbled_blocks_render_track_item( $track, $show_artwork, $show_timestamp, $link_to_lastfm ) {
 	$track_name   = esc_html( $track['name'] );
 	$artist_name  = esc_html( $track['artist'] );
@@ -140,6 +141,7 @@ function scrobbled_blocks_render_track_item( $track, $show_artwork, $show_timest
 	</div>
 	<?php
 	return ob_get_clean();
+}
 }
 
 if ( 'list' === $layout ) :
