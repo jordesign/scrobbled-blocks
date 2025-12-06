@@ -5,7 +5,7 @@
  * Description:       Display your Last.fm listening activity on your WordPress site with native Gutenberg blocks. Show what you're currently playing or your recent listening history.
  * Version:           1.0.0
  * Requires at least: 6.0
- * Tested up to:      6.7
+ * Tested up to:      6.9
  * Requires PHP:      7.4
  * Author:            jordesign
  * Author URI:        https://jordangillman.blog
@@ -37,6 +37,7 @@ define( 'SCROBBLED_BLOCKS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 function scrobbled_blocks_activate() {
 	// Clear any stale transients.
 	global $wpdb;
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Bulk transient cleanup requires direct query.
 	$wpdb->query(
 		$wpdb->prepare(
 			"DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s",
@@ -55,6 +56,7 @@ register_activation_hook( __FILE__, 'scrobbled_blocks_activate' );
 function scrobbled_blocks_deactivate() {
 	// Clear transients on deactivation.
 	global $wpdb;
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Bulk transient cleanup requires direct query.
 	$wpdb->query(
 		$wpdb->prepare(
 			"DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s",
@@ -101,6 +103,7 @@ final class Scrobbled_Blocks {
 	 * Load required files.
 	 */
 	private function load_dependencies() {
+		require_once SCROBBLED_BLOCKS_PLUGIN_DIR . 'includes/functions.php';
 		require_once SCROBBLED_BLOCKS_PLUGIN_DIR . 'includes/class-api.php';
 		require_once SCROBBLED_BLOCKS_PLUGIN_DIR . 'includes/class-settings.php';
 		require_once SCROBBLED_BLOCKS_PLUGIN_DIR . 'includes/class-rest-api.php';
@@ -110,20 +113,8 @@ final class Scrobbled_Blocks {
 	 * Initialize hooks.
 	 */
 	private function init_hooks() {
-		add_action( 'init', array( $this, 'load_textdomain' ) );
 		add_action( 'init', array( $this, 'register_blocks' ) );
 		add_action( 'enqueue_block_assets', array( $this, 'enqueue_block_assets' ) );
-	}
-
-	/**
-	 * Load plugin text domain.
-	 */
-	public function load_textdomain() {
-		load_plugin_textdomain(
-			'scrobbled-blocks',
-			false,
-			dirname( SCROBBLED_BLOCKS_PLUGIN_BASENAME ) . '/languages'
-		);
 	}
 
 	/**

@@ -14,115 +14,79 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$settings = Scrobbled_Blocks_Settings::get_instance();
+// Wrap in IIFE to avoid global variable pollution.
+// phpcs:ignore Generic.WhiteSpace.ScopeIndent.IncorrectExact
+echo ( static function ( $scrobbled_attributes ) {
+	$scrobbled_settings = Scrobbled_Blocks_Settings::get_instance();
 
-// Check if plugin is configured.
-if ( ! $settings->is_configured() ) {
-	// Render nothing on frontend when not configured.
-	return;
-}
-
-$api   = Scrobbled_Blocks_API::get_instance();
-$track = $api->get_now_playing();
-
-// Graceful degradation - render nothing if API fails or no tracks.
-if ( is_wp_error( $track ) || empty( $track ) ) {
-	return;
-}
-
-$show_artwork   = $attributes['showArtwork'] ?? true;
-$artwork_size   = $attributes['artworkSize'] ?? 64;
-$show_timestamp = $attributes['showTimestamp'] ?? true;
-$link_to_lastfm = $attributes['linkToLastFm'] ?? true;
-
-/**
- * Get relative time string.
- *
- * @param int|null $timestamp Unix timestamp.
- * @return string Relative time string.
- */
-if ( ! function_exists( 'scrobbled_blocks_get_relative_time' ) ) {
-	function scrobbled_blocks_get_relative_time( $timestamp ) {
-		if ( ! $timestamp ) {
-			return __( 'just now', 'scrobbled-blocks' );
-		}
-
-		$diff = time() - $timestamp;
-
-		if ( $diff < 60 ) {
-			return __( 'just now', 'scrobbled-blocks' );
-		}
-
-		if ( $diff < 3600 ) {
-			$minutes = floor( $diff / 60 );
-			return sprintf(
-				/* translators: %d: number of minutes */
-				_n( '%d minute ago', '%d minutes ago', $minutes, 'scrobbled-blocks' ),
-				$minutes
-			);
-		}
-
-		if ( $diff < 86400 ) {
-			$hours = floor( $diff / 3600 );
-			return sprintf(
-				/* translators: %d: number of hours */
-				_n( '%d hour ago', '%d hours ago', $hours, 'scrobbled-blocks' ),
-				$hours
-			);
-		}
-
-		$days = floor( $diff / 86400 );
-		return sprintf(
-			/* translators: %d: number of days */
-			_n( '%d day ago', '%d days ago', $days, 'scrobbled-blocks' ),
-			$days
-		);
+	// Check if plugin is configured.
+	if ( ! $scrobbled_settings->is_configured() ) {
+		return '';
 	}
-}
 
-$wrapper_attributes = get_block_wrapper_attributes( array(
-	'class' => 'wp-block-scrobble-blocks-now-playing',
-	'style' => '--scrobble-artwork-size: ' . absint( $artwork_size ) . 'px;',
-) );
+	$scrobbled_api   = Scrobbled_Blocks_API::get_instance();
+	$scrobbled_track = $scrobbled_api->get_now_playing();
 
-$track_name   = esc_html( $track['name'] );
-$artist_name  = esc_html( $track['artist'] );
-$album_name   = esc_html( $track['album'] );
-$artwork_url  = esc_url( $track['artwork'] );
-$track_url    = esc_url( $track['url'] );
-$is_playing   = ! empty( $track['nowplaying'] );
-$timestamp    = $track['timestamp'] ?? null;
+	// Graceful degradation - render nothing if API fails or no tracks.
+	if ( is_wp_error( $scrobbled_track ) || empty( $scrobbled_track ) ) {
+		return '';
+	}
 
-// Generate ISO timestamp for datetime attribute.
-$iso_timestamp   = $timestamp ? gmdate( 'c', $timestamp ) : '';
-$absolute_time   = $timestamp ? wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $timestamp ) : '';
-$relative_time   = $is_playing ? __( 'Playing now', 'scrobbled-blocks' ) : scrobbled_blocks_get_relative_time( $timestamp );
-?>
-<div <?php echo $wrapper_attributes; ?>>
-	<?php if ( $show_artwork ) : ?>
+	$scrobbled_show_artwork   = $scrobbled_attributes['showArtwork'] ?? true;
+	$scrobbled_artwork_size   = $scrobbled_attributes['artworkSize'] ?? 64;
+	$scrobbled_show_timestamp = $scrobbled_attributes['showTimestamp'] ?? true;
+	$scrobbled_link_to_lastfm = $scrobbled_attributes['linkToLastFm'] ?? true;
+
+	$scrobbled_wrapper_attributes = get_block_wrapper_attributes(
+		array(
+			'class' => 'wp-block-scrobble-blocks-now-playing',
+			'style' => '--scrobble-artwork-size: ' . absint( $scrobbled_artwork_size ) . 'px;',
+		)
+	);
+
+	$scrobbled_track_name  = $scrobbled_track['name'];
+	$scrobbled_artist_name = $scrobbled_track['artist'];
+	$scrobbled_album_name  = $scrobbled_track['album'];
+	$scrobbled_artwork_url = $scrobbled_track['artwork'];
+	$scrobbled_track_url   = $scrobbled_track['url'];
+	$scrobbled_is_playing  = ! empty( $scrobbled_track['nowplaying'] );
+	$scrobbled_timestamp   = $scrobbled_track['timestamp'] ?? null;
+
+	// Generate ISO timestamp for datetime attribute.
+	$scrobbled_iso_timestamp = $scrobbled_timestamp ? gmdate( 'c', $scrobbled_timestamp ) : '';
+	$scrobbled_absolute_time = $scrobbled_timestamp ? wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $scrobbled_timestamp ) : '';
+	$scrobbled_relative_time = $scrobbled_is_playing ? __( 'Playing now', 'scrobbled-blocks' ) : scrobbled_blocks_get_relative_time( $scrobbled_timestamp );
+
+	ob_start();
+	?>
+<div <?php echo wp_kses_post( $scrobbled_wrapper_attributes ); ?>>
+	<?php if ( $scrobbled_show_artwork ) : ?>
 		<div class="scrobble-artwork">
-			<?php if ( $link_to_lastfm && $track_url ) : ?>
-				<a href="<?php echo $track_url; ?>" target="_blank" rel="noopener noreferrer">
-					<img src="<?php echo $artwork_url; ?>" alt="<?php echo esc_attr( sprintf( '%s by %s', $album_name, $artist_name ) ); ?>" loading="lazy" />
+			<?php if ( $scrobbled_link_to_lastfm && $scrobbled_track_url ) : ?>
+				<a href="<?php echo esc_url( $scrobbled_track_url ); ?>" target="_blank" rel="noopener noreferrer">
+					<img src="<?php echo esc_url( $scrobbled_artwork_url ); ?>" alt="<?php echo esc_attr( sprintf( '%s by %s', $scrobbled_album_name, $scrobbled_artist_name ) ); ?>" loading="lazy" />
 				</a>
 			<?php else : ?>
-				<img src="<?php echo $artwork_url; ?>" alt="<?php echo esc_attr( sprintf( '%s by %s', $album_name, $artist_name ) ); ?>" loading="lazy" />
+				<img src="<?php echo esc_url( $scrobbled_artwork_url ); ?>" alt="<?php echo esc_attr( sprintf( '%s by %s', $scrobbled_album_name, $scrobbled_artist_name ) ); ?>" loading="lazy" />
 			<?php endif; ?>
 		</div>
 	<?php endif; ?>
 	<div class="scrobble-info">
 		<span class="scrobble-track">
-			<?php if ( $link_to_lastfm && $track_url ) : ?>
-				<a href="<?php echo $track_url; ?>" target="_blank" rel="noopener noreferrer"><?php echo $track_name; ?></a>
+			<?php if ( $scrobbled_link_to_lastfm && $scrobbled_track_url ) : ?>
+				<a href="<?php echo esc_url( $scrobbled_track_url ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( $scrobbled_track_name ); ?></a>
 			<?php else : ?>
-				<?php echo $track_name; ?>
+				<?php echo esc_html( $scrobbled_track_name ); ?>
 			<?php endif; ?>
 		</span>
-		<span class="scrobble-artist"><?php echo $artist_name; ?></span>
-		<?php if ( $show_timestamp ) : ?>
-			<time class="scrobble-timestamp" datetime="<?php echo esc_attr( $iso_timestamp ); ?>" title="<?php echo esc_attr( $absolute_time ); ?>">
-				<?php echo esc_html( $relative_time ); ?>
+		<span class="scrobble-artist"><?php echo esc_html( $scrobbled_artist_name ); ?></span>
+		<?php if ( $scrobbled_show_timestamp ) : ?>
+			<time class="scrobble-timestamp" datetime="<?php echo esc_attr( $scrobbled_iso_timestamp ); ?>" title="<?php echo esc_attr( $scrobbled_absolute_time ); ?>">
+				<?php echo esc_html( $scrobbled_relative_time ); ?>
 			</time>
 		<?php endif; ?>
 	</div>
 </div>
+	<?php
+	return ob_get_clean();
+} )( $attributes );
