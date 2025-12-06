@@ -13,7 +13,6 @@
 	--scrobble-font-size-timestamp: 0.6em;
 	--scrobble-color-text: inherit;
 	--scrobble-color-text-secondary: inherit;
-	--scrobble-color-link: inherit;
 }
 
 /* Now Playing Block */
@@ -52,7 +51,7 @@
 }
 
 .wp-block-scrobble-blocks-now-playing .scrobble-track a {
-	color: var(--scrobble-color-link);
+	color: var(--wp--style--color--link, currentColor);
 	text-decoration: none;
 }
 
@@ -162,7 +161,7 @@
 }
 
 .wp-block-scrobble-blocks-recently-played .scrobble-track a {
-	color: var(--scrobble-color-link);
+	color: var(--wp--style--color--link, currentColor);
 	text-decoration: none;
 }
 
