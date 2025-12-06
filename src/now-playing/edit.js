@@ -115,10 +115,19 @@ export default function Edit( { attributes, setAttributes } ) {
 			<>
 				{ showArtwork && (
 					<div className="scrobble-artwork">
-						<img
-							src={ track.artwork }
-							alt={ `${ track.album } by ${ track.artist }` }
-						/>
+						{ linkToLastFm ? (
+							<a href={ track.url } target="_blank" rel="noopener noreferrer">
+								<img
+									src={ track.artwork }
+									alt={ `${ track.album } by ${ track.artist }` }
+								/>
+							</a>
+						) : (
+							<img
+								src={ track.artwork }
+								alt={ `${ track.album } by ${ track.artist }` }
+							/>
+						) }
 					</div>
 				) }
 				<div className="scrobble-info">

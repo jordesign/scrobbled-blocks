@@ -101,7 +101,13 @@ $relative_time   = $is_playing ? __( 'Playing now', 'scrobbled-blocks' ) : scrob
 <div <?php echo $wrapper_attributes; ?>>
 	<?php if ( $show_artwork ) : ?>
 		<div class="scrobble-artwork">
-			<img src="<?php echo $artwork_url; ?>" alt="<?php echo esc_attr( sprintf( '%s by %s', $album_name, $artist_name ) ); ?>" loading="lazy" />
+			<?php if ( $link_to_lastfm && $track_url ) : ?>
+				<a href="<?php echo $track_url; ?>" target="_blank" rel="noopener noreferrer">
+					<img src="<?php echo $artwork_url; ?>" alt="<?php echo esc_attr( sprintf( '%s by %s', $album_name, $artist_name ) ); ?>" loading="lazy" />
+				</a>
+			<?php else : ?>
+				<img src="<?php echo $artwork_url; ?>" alt="<?php echo esc_attr( sprintf( '%s by %s', $album_name, $artist_name ) ); ?>" loading="lazy" />
+			<?php endif; ?>
 		</div>
 	<?php endif; ?>
 	<div class="scrobble-info">
