@@ -1,0 +1,34 @@
+# Development files
+.distignore
+.editorconfig
+.gitignore
+.git
+.github
+
+# Source and build tools
+node_modules
+src
+package.json
+package-lock.json
+webpack.config.js
+composer.json
+composer.lock
+vendor
+
+# Documentation (WordPress uses readme.txt)
+README.md
+docs
+*.md
+!readme.txt
+
+# IDE and OS files
+.DS_Store
+.vscode
+.idea
+*.log
+
+# Testing
+tests
+phpunit.xml
+phpcs.xml
+.phpcs.xml

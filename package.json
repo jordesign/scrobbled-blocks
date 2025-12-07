@@ -2,9 +2,18 @@
 	"name": "scrobbled-blocks",
 	"version": "1.0.0",
 	"description": "Display your Last.fm listening activity on your WordPress site with Gutenberg blocks.",
-	"author": "Your Name",
+	"author": "jordesign",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
+	"files": [
+		"assets",
+		"build",
+		"includes",
+		"languages",
+		"readme.txt",
+		"scrobbled-blocks.php",
+		"uninstall.php"
+	],
 	"scripts": {
 		"build": "wp-scripts build",
 		"start": "wp-scripts start",
