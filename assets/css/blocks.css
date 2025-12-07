@@ -47,11 +47,9 @@
 .wp-block-scrobble-blocks-now-playing .scrobble-track {
 	font-size: var(--scrobble-font-size-track);
 	font-weight: 600;
-	color: var(--scrobble-color-text);
 }
 
 .wp-block-scrobble-blocks-now-playing .scrobble-track a {
-	color: var(--wp--style--color--link, currentColor);
 	text-decoration: none;
 }
 
@@ -157,11 +155,9 @@
 .wp-block-scrobble-blocks-recently-played .scrobble-track {
 	font-size: var(--scrobble-font-size-track);
 	font-weight: 600;
-	color: var(--scrobble-color-text);
 }
 
 .wp-block-scrobble-blocks-recently-played .scrobble-track a {
-	color: var(--wp--style--color--link, currentColor);
 	text-decoration: none;
 }
 
