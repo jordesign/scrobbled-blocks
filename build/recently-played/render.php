@@ -15,8 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Wrap in IIFE to avoid global variable pollution.
-// phpcs:ignore Generic.WhiteSpace.ScopeIndent.IncorrectExact
-echo ( static function ( $scrobbled_attributes ) {
+$scrobbled_blocks_output = ( static function ( $scrobbled_blocks_attributes ) {
 	$scrobbled_settings = Scrobbled_Blocks_Settings::get_instance();
 
 	// Check if plugin is configured.
@@ -24,12 +23,12 @@ echo ( static function ( $scrobbled_attributes ) {
 		return '';
 	}
 
-	$scrobbled_number_of_items = $scrobbled_attributes['numberOfItems'] ?? 5;
-	$scrobbled_layout          = $scrobbled_attributes['layout'] ?? 'list';
-	$scrobbled_grid_columns    = $scrobbled_attributes['gridColumns'] ?? 3;
-	$scrobbled_show_artwork    = $scrobbled_attributes['showArtwork'] ?? true;
-	$scrobbled_show_timestamp  = $scrobbled_attributes['showTimestamp'] ?? true;
-	$scrobbled_link_to_lastfm  = $scrobbled_attributes['linkToLastFm'] ?? true;
+	$scrobbled_number_of_items = $scrobbled_blocks_attributes['numberOfItems'] ?? 5;
+	$scrobbled_layout          = $scrobbled_blocks_attributes['layout'] ?? 'list';
+	$scrobbled_grid_columns    = $scrobbled_blocks_attributes['gridColumns'] ?? 3;
+	$scrobbled_show_artwork    = $scrobbled_blocks_attributes['showArtwork'] ?? true;
+	$scrobbled_show_timestamp  = $scrobbled_blocks_attributes['showTimestamp'] ?? true;
+	$scrobbled_link_to_lastfm  = $scrobbled_blocks_attributes['linkToLastFm'] ?? true;
 
 	$scrobbled_api    = Scrobbled_Blocks_API::get_instance();
 	$scrobbled_tracks = $scrobbled_api->get_recent_tracks( $scrobbled_number_of_items, 5 );
@@ -137,3 +136,6 @@ echo ( static function ( $scrobbled_attributes ) {
 
 	return ob_get_clean();
 } )( $attributes );
+
+// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped within the closure.
+echo $scrobbled_blocks_output;

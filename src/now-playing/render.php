@@ -15,8 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Wrap in IIFE to avoid global variable pollution.
-// phpcs:ignore Generic.WhiteSpace.ScopeIndent.IncorrectExact
-echo ( static function ( $scrobbled_attributes ) {
+$scrobbled_blocks_output = ( static function ( $scrobbled_blocks_attributes ) {
 	$scrobbled_settings = Scrobbled_Blocks_Settings::get_instance();
 
 	// Check if plugin is configured.
@@ -32,10 +31,10 @@ echo ( static function ( $scrobbled_attributes ) {
 		return '';
 	}
 
-	$scrobbled_show_artwork   = $scrobbled_attributes['showArtwork'] ?? true;
-	$scrobbled_artwork_size   = $scrobbled_attributes['artworkSize'] ?? 64;
-	$scrobbled_show_timestamp = $scrobbled_attributes['showTimestamp'] ?? true;
-	$scrobbled_link_to_lastfm = $scrobbled_attributes['linkToLastFm'] ?? true;
+	$scrobbled_show_artwork   = $scrobbled_blocks_attributes['showArtwork'] ?? true;
+	$scrobbled_artwork_size   = $scrobbled_blocks_attributes['artworkSize'] ?? 64;
+	$scrobbled_show_timestamp = $scrobbled_blocks_attributes['showTimestamp'] ?? true;
+	$scrobbled_link_to_lastfm = $scrobbled_blocks_attributes['linkToLastFm'] ?? true;
 
 	$scrobbled_wrapper_attributes = get_block_wrapper_attributes(
 		array(
@@ -90,3 +89,6 @@ echo ( static function ( $scrobbled_attributes ) {
 	<?php
 	return ob_get_clean();
 } )( $attributes );
+
+// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped within the closure.
+echo $scrobbled_blocks_output;
