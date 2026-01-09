@@ -35,9 +35,29 @@ Show a list or grid of your recent scrobbles. Configurable from 1-20 tracks, wit
 * **Custom Placeholder** - Upload your own placeholder image for tracks without artwork
 
 
-= Privacy =
+= External Services =
 
-This plugin connects to the Last.fm API to fetch your public listening data. No personal data from your visitors is collected or sent to Last.fm. Your API key is stored securely in your WordPress database.
+This plugin connects to the Last.fm API to retrieve your public listening history and display it on your WordPress site.
+
+**What data is sent:**
+
+* Your Last.fm username
+* Your Last.fm API key
+* The number of tracks to retrieve
+
+**When data is sent:**
+
+* When the Now Playing or Recently Played blocks are displayed on a page
+* Data is cached locally to minimise API requests (1 minute for Now Playing, 5 minutes for Recently Played)
+
+**Service provider:**
+
+This service is provided by Last.fm Ltd.
+
+* [Last.fm Terms of Service](https://www.last.fm/legal/terms)
+* [Last.fm Privacy Policy](https://www.last.fm/legal/privacy)
+
+No personal data from your site visitors is collected or sent to Last.fm. Only your configured Last.fm username and API key are transmitted to retrieve your public listening data.
 
 == Installation ==
 
