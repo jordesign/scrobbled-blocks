@@ -139,7 +139,7 @@ class Scrobbled_Blocks_API {
 			);
 		}
 
-		$tracks = $this->parse_tracks( $response );
+		$tracks = $this->parse_tracks( $response, $limit );
 
 		// Cache the response.
 		$cache_duration = $cache_minutes * MINUTE_IN_SECONDS;
@@ -226,9 +226,10 @@ class Scrobbled_Blocks_API {
 	 * Parse tracks from API response.
 	 *
 	 * @param array $response API response.
+	 * @param int   $limit    Maximum number of tracks to return.
 	 * @return array Parsed tracks.
 	 */
-	private function parse_tracks( $response ) {
+	private function parse_tracks( $response, $limit = 0 ) {
 		$tracks = array();
 
 		if ( ! isset( $response['recenttracks']['track'] ) ) {
@@ -257,6 +258,12 @@ class Scrobbled_Blocks_API {
 			);
 
 			$tracks[] = $track;
+		}
+
+		// Last.fm returns "now playing" track in addition to the limit.
+		// Slice to the requested limit to avoid returning extra tracks.
+		if ( $limit > 0 && count( $tracks ) > $limit ) {
+			$tracks = array_slice( $tracks, 0, $limit );
 		}
 
 		return $tracks;

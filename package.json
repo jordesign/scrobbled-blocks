@@ -10,6 +10,7 @@
 		"build",
 		"includes",
 		"languages",
+		"src",
 		"readme.txt",
 		"scrobbled-blocks.php",
 		"uninstall.php"
