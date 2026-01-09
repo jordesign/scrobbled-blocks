@@ -187,6 +187,19 @@ The plugin uses CSS custom properties (CSS variables) for easy theming. Add thes
 * A Last.fm account (free)
 * A Last.fm API key (free, get one at last.fm/api)
 
+= Source Code =
+
+This plugin uses build tools to compile JavaScript for the block editor. The compiled files are located in the `build/` directory.
+
+The original, human-readable source code is available in the `src/` directory and on GitHub:
+[https://github.com/jordesign/scrobbled-blocks](https://github.com/jordesign/scrobbled-blocks)
+
+To build from source:
+
+1. Clone the repository
+2. Run `npm install` to install dependencies
+3. Run `npm run build` to compile the blocks
+
 = Support =
 
 For bug reports and feature requests, please visit the [GitHub repository](https://github.com/jordesign/scrobbled-blocks/issues).
